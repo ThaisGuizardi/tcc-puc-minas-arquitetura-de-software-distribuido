@@ -6,7 +6,7 @@
 - Disciplina: 16 - Projeto Integrado – Arquitetura de Software Distribuído (2021).
 - Nota do Projeto: 99,00.
 
-## Download Projeto
+## Download do projeto
 
 - Módulo A - Vídeo de Apresentação.
 - Módulo B - Código da Aplicação.
