@@ -13,13 +13,13 @@
 - Módulo C - Vídeo de Apresentação Final.
 - Donwload: https://drive.google.com/drive/folders/1oJAm8lt_1vWJGOLGDjNCR4pnIvuFLbqO?usp=sharing
 
-## 📋 Pré-requisitos
+## Pré-requisitos
 
 - Visual Studio 2022 Community: https://visualstudio.microsoft.com/pt-br/vs/community/
 - SQL Server Management Studio v18: https://docs.microsoft.com/pt-br/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16
 - SQL Server Express: https://www.microsoft.com/pt-br/sql-server/sql-server-downloads
 
-## 🔧 Funcionamento do projeto
+## Funcionamento do projeto
 
 - SQL Server Management Studio: Restaurar os bancos de dados MenuFacileMvc.bak, MenuFacileServiceManager.bak e MenuFacileServiceOrder.bak.
 - Visual Studio 2022 Community: Abrir a solução MenuFacile.sln.
@@ -34,7 +34,7 @@
     ![image](https://user-images.githubusercontent.com/3730961/183534130-f77379b9-7965-4d8e-8d23-b9f75c1b3107.png)
 
 
-## 👀 Usuários e senha de acesso à aplicação
+## Usuários e senha de acesso à aplicação
 
 - adm@menufacile.com.br
 - entrega@menufacile.com.br
