@@ -6,6 +6,13 @@
 - Disciplina: 16 - Projeto Integrado – Arquitetura de Software Distribuído (2021).
 - Nota do Projeto: 99,00.
 
+## Download Projeto
+
+- Módulo A - Vídeo de Apresentação.
+- Módulo B - Código da Aplicação.
+- Módulo C - Vídeo de Apresentação Final.
+- Donwload: https://drive.google.com/drive/folders/1oJAm8lt_1vWJGOLGDjNCR4pnIvuFLbqO?usp=sharing
+
 ## 📋 Pré-requisitos
 
 - Visual Studio 2022 Community: https://visualstudio.microsoft.com/pt-br/vs/community/
