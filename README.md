@@ -40,3 +40,7 @@
 - entrega@menufacile.com.br
 - cozinha@manufacile.com.br
 - Todos os usuários senha 123Mudar_
+
+## Contato Linked-in
+
+- www.linkedin.com/in/thaisguizardi
