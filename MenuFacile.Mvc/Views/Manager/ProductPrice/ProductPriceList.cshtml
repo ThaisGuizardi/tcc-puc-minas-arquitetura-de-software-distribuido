@@ -1,0 +1,59 @@
+﻿@using MenuFacile.Mvc.Models.Manager.ProductPrice
+
+@model IEnumerable<ProductPriceListViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Preços do Produto";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+<div class="row">
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Cód. Preço Prod.</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Preço Valido De</th>
+                    <th scope="col">Preço Valido Até</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var productPrice in Model)
+                {
+                    <tr>
+                        <td scope="col">@productPrice.IdProductPrice</td>
+                        <td scope="col">@productPrice.ProductName</td>
+                        <td scope="col">@string.Format("{0:C}", @productPrice.Price)</td>
+                        <td scope="col">@productPrice.ValidFrom.ToString("dd/MM/yyyy")</td>
+                        <td scope="col">@productPrice.ValidUntil.ToString("dd/MM/yyyy")</td>
+                        <td scope="col">@productPrice.Active</td>
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-action="ProductPriceEdit" asp-controller="ProductPrice" asp-route-id="@productPrice.IdProductPrice">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                        <td scope="col" class="text-center">
+                            <form method="post" asp-action="ProductPriceDelete" asp-controller="ProductPrice" asp-route-id="@productPrice.IdProductPrice">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="col">
+            <h4>Sem preços do produto cadastrados.</h4>
+        </div>
+    }
+</div>

@@ -1,0 +1,53 @@
+﻿@using MenuFacile.Mvc.Models.Manager.Menu
+
+@model MenuAddViewModel
+@{
+    ViewData["Title"] = "Adicionar Cardápio";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<form method="post" class="row g-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group col-md-4">
+        <label>Restaurante</label>
+        <select asp-for="IdRestaurant" asp-items="ViewBag.Restaurants" class="form-control">
+            <option>-- Selecionar --</option>
+        </select>
+        <span asp-validation-for="IdRestaurant" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-8">
+        <label>Nome</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-4">
+        <label>Válido De</label>
+        <input type="date" asp-for="ValidFrom" class="form-control"/>
+        <span asp-validation-for="ValidFrom" class="text-danger"></span>
+    </div>
+     <div class="form-group col-md-4">
+        <label>Válido Até</label>
+        <input type="date" asp-for="ValidTo" class="form-control"/>
+        <span asp-validation-for="ValidTo" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-4">
+        <label>&nbsp;</label>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" asp-for="Active">
+            <label class="form-check-label" for="Active">
+                Ativo
+            </label>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="form-group col-12">
+            <button type="submit" name="submitButton" value="save" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

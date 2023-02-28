@@ -1,0 +1,61 @@
+﻿@using MenuFacile.Mvc.Models.Manager.Restaurant
+
+@model IEnumerable<RestaurantListViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Restaurantes";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+<div class="row">
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Cód. Rest.</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">Segmento</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var restaurant in Model)
+                {
+                    <tr>
+                        <td scope="col">@restaurant.IdRestaurant</td>
+                        <td scope="col">@restaurant.Name</td>
+                        <td scope="col">@restaurant.Cnpj</td>
+                        <td scope="col">@restaurant.SegmentName</td>
+                        <td scope="col">@restaurant.StateUF</td>
+                        <td scope="col">@restaurant.CityName</td>
+                        <td scope="col">@restaurant.Active</td>
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-action="RestaurantEdit" asp-controller="Restaurant" asp-route-id="@restaurant.IdRestaurant">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                        <td scope="col" class="text-center">
+                            <form method="post" asp-action="RestaurantDelete" asp-controller="Restaurant" asp-route-id="@restaurant.IdRestaurant">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="col">
+            <h4>Sem restaurantes cadastrados.</h4>
+        </div>
+    }
+</div>

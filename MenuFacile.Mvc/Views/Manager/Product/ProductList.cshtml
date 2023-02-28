@@ -1,0 +1,57 @@
+﻿@using MenuFacile.Mvc.Models.Manager.Product
+
+@model IEnumerable<ProductListViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Produtos";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+<div class="row">
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Cód. Produto</th>
+                    <th scope="col">Restaurante</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td scope="col">@product.IdProduct</td>
+                        <td scope="col">@product.RestaurantName</td>
+                        <td scope="col">@product.CategoryName</td>
+                        <td scope="col">@product.Name</td>
+                        <td scope="col">@product.Active</td>
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-action="ProductEdit" asp-controller="Product" asp-route-id="@product.IdProduct">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                        <td scope="col" class="text-center">
+                            <form method="post" asp-action="ProductDelete" asp-controller="Product" asp-route-id="@product.IdProduct">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="col">
+            <h4>Sem produtos cadastradas.</h4>
+        </div>
+    }
+</div>

@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "Lista de Permissões";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+<div class="row">
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Código Permissão</th>
+                    <th scope="col">Nome Permisão</th>
+                    <th scope="col" class="text-center">Adic. Usuários</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td scope="col">@role.Id</td>
+                        <td scope="col">@role.Name</td>
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-success btn-sm" asp-action="EditUsersInRole" asp-controller="Administration" asp-route-id="@role.Id">
+                               <i class="bi bi-person-check-fill"></i>
+                            </a>
+                        </td>
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id">
+                               <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                         <td scope="col" class="text-center">
+                            <form method="post" asp-action="DeleteRole" asp-controller="Administration" asp-route-id="@role.Id">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="col">
+            <h4>Sem permissões cadastradas.</h4>
+        </div>
+    }
+</div>

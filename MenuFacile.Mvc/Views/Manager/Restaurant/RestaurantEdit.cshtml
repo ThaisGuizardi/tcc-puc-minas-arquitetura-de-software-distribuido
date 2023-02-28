@@ -1,0 +1,198 @@
+﻿@using MenuFacile.Mvc.Models.Manager.Restaurant
+
+@model RestaurantEditViewModel
+@{
+    ViewData["Title"] = "Editar Restaurante";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<form method="post" class="row g-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="IdRestaurant" class="form-form-check-input" />
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>Nome</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label>Descrição</label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label>CNPJ</label>
+            <input asp-for="Cnpj" class="form-control" />
+            <span asp-validation-for="Cnpj" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label>Valor Mínimo Entrega</label>
+            <input asp-for="MinimumDeliveryValue" class="form-control" />
+            <span asp-validation-for="MinimumDeliveryValue" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-2">
+            <label>Segmento</label>
+            <select asp-for="IdSegment" asp-items="ViewBag.Segments" class="form-control">
+                <option>-- Selecionar --</option>
+            </select>
+            <span asp-validation-for="IdSegment" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label>Imagem Logo</label>
+            <input asp-for="ImageLogo" class="form-control" />
+            <span asp-validation-for="ImageLogo" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-2">
+            <label>&nbsp;</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="FreeDelivery">
+                <label class="form-check-label" for="FreeDelivery">
+                    Entrega Grátis
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label>&nbsp;</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="Active">
+                <label class="form-check-label" for="Active">
+                    Ativo
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="pt-2"></div>
+    <div class="row">
+        <h4>Funcionamento</h4>
+        <hr />
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Hora Abertura</label>
+            <input asp-for="StartHoursOperation" class="form-control" />
+            <span asp-validation-for="StartHoursOperation" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Hora Fechamento</label>
+            <input asp-for="EndHoursOperation" class="form-control" />
+            <span asp-validation-for="EndHoursOperation" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="OpenSunday">
+                <label class="form-check-label" for="OpenSunday">
+                    Domingo
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="OpenMonday">
+                <label class="form-check-label" for="OpenMonday">
+                    Segunda-feira
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="OpenTuesday">
+                <label class="form-check-label" for="OpenTuesday">
+                    Terça-feira
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="OpenWednesday">
+                <label class="form-check-label" for="OpenWednesday">
+                    Quarta-feira
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="OpenThursday">
+                <label class="form-check-label" for="OpenThursday">
+                    Quinta-feira
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="OpenFriday">
+                <label class="form-check-label" for="OpenFriday">
+                    Sexta-feira
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-md-1">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="OpenSaturday">
+                <label class="form-check-label" for="OpenSaturday">
+                    Sábado
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="pt-2"></div>
+    <div class="row">
+        <h4>Endereço</h4>
+        <hr />
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>Endereço</label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label>Número</label>
+            <input asp-for="AddressNumber" class="form-control" />
+            <span asp-validation-for="AddressNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label>Complemento</label>
+            <input asp-for="Complement" class="form-control" />
+            <span asp-validation-for="Complement" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>Bairro</label>
+            <input asp-for="Neighborhood" class="form-control" />
+            <span asp-validation-for="Neighborhood" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label>CEP</label>
+            <input asp-for="ZipCode" class="form-control" />
+            <span asp-validation-for="ZipCode" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-1">
+            <label>Estado</label>
+            <select asp-for="IdState" asp-items="ViewBag.States" class="form-control" onchange="alert(" OK")">
+                <option>-- UF --</option>
+            </select>
+            <span asp-validation-for="IdState" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Cidade</label>
+            <select asp-for="IdCity" asp-items="ViewBag.Cities" class="form-control">
+                <option>-- Cidades --</option>
+            </select>
+            <span asp-validation-for="IdCity" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="form-group col-12">
+            <button type="submit" name="submitButton" value="save" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

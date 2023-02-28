@@ -1,0 +1,55 @@
+﻿@using MenuFacile.Mvc.Models.Manager.Segment
+
+@model IEnumerable<SegmentListViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Segmentos";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+<div class="row">
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Código Segmento</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var segment in Model)
+                {
+                    <tr>
+                        <td scope="col">@segment.IdSegment</td>
+                        <td scope="col">@segment.Name</td>
+                        <td scope="col">@segment.Description</td>
+                        <td scope="col">@segment.Active</td>
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-action="SegmentEdit" asp-controller="Segment" asp-route-id="@segment.IdSegment">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                        <td scope="col" class="text-center">
+                            <form method="post" asp-action="SegmentDelete" asp-controller="Segment" asp-route-id="@segment.IdSegment">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="col">
+            <h4>Sem segmentos cadastrados.</h4>
+        </div>
+    }
+</div>

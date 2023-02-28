@@ -1,0 +1,157 @@
+﻿@{
+    Layout = null;
+}
+
+@using MenuFacile.Mvc.Models.Order.Dashboard
+
+@model OrderViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pedido</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="container pt-3">
+        <main role="main" class="pb-3">
+            <form method="post" class="row g-3">
+                <input asp-for="@Model.OrderAdd.IdRestaurant" type="hidden" />
+                <input asp-for="@Model.OrderAdd.IdOrder" type="hidden" />
+                <h3 class="text-center">Logo Restaurante</h3>
+                <hr />
+                <div class="row">
+                    <div class="col-md-3">
+                        <p><b>@Model.GetRestaurant.RestaurantName</b></p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-danger"><b>@Model.GetRestaurant.RestaurantOpen</b></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p><b>@Model.GetRestaurant.SegmentName</b></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p><b>@string.Format("{0:C}", Model.GetRestaurant.MinimumDeliveryValue)</b></p>
+                    </div>
+                    <div class="col-md-3">
+                        <p><b>@string.Format("{0:C}", Model.GetRestaurant.DeliveryTax)</b></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p><b>@Model.GetRestaurant.RestaurantAddress</b></p>
+                    </div>
+                </div>
+                <hr />
+                <h3>Informações Cliente</h3>
+                <div class="form-group col-md-12">
+                    <label class="font-weight-bold">Endereço</label>
+                    <input asp-for="@Model.OrderAdd.CustomerAddress" class="form-control" />
+                    <span asp-validation-for="@Model.OrderAdd.CustomerAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="font-weight-bold">Forma de Pagamento</label>
+                    <select asp-for="@Model.OrderAdd.IdPaymentMethod" asp-items="ViewBag.PaymentMethods" class="form-control">
+                        <option>-- Selecionar --</option>
+                    </select>
+                    <span asp-validation-for="@Model.OrderAdd.IdPaymentMethod" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="font-weight-bold">Troco Para</label>
+                    <input asp-for="@Model.OrderAdd.ChangeFor" class="form-control" />
+                    <span asp-validation-for="@Model.OrderAdd.ChangeFor" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="font-weight-bold">Nome</label>
+                    <input asp-for="@Model.OrderAdd.CustomerName" class="form-control" />
+                    <span asp-validation-for="@Model.OrderAdd.CustomerName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="font-weight-bold">Telefone</label>
+                    <input asp-for="@Model.OrderAdd.CustomerPhone" class="form-control" />
+                    <span asp-validation-for="@Model.OrderAdd.CustomerPhone" class="text-danger"></span>
+                </div>
+
+                @if (Model.GetListCurrentProductsByIdRestaurant.Any())
+                {
+                    <table class="table table-borderless">
+                        <tbody>
+                            @for (var i = 0; i < Model.GetListCurrentProductsByIdRestaurant.Count(); i++)
+                            {
+                                string beforeCategoryName = i > 0 ? @Model.GetListCurrentProductsByIdRestaurant.ToArray()[i - 1].CategoryName : @Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].CategoryName;
+                                string currentCategoryName = @Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].CategoryName;
+
+                                if (i == 0 || currentCategoryName != beforeCategoryName)
+                                {
+                                    <tr class="table-secondary table-bordered">
+                                        <td scope="col" class="border"><h5>@Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].CategoryName</h5></td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        <table class="table-sm" style="width:100%">
+                                            <tr>
+                                                <td scope="col"><b>@Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].Name</b></td>
+                                                <td scope="col" align="right" rowspan="2"><img src="~/img/@Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].Image" width="86" height="72" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="col">@Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].Description</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="col">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><b>@string.Format("{0:C}", Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].Price)</b></span>
+                                                        <span class="input-group-text">Qtd:</span>
+                                                        <input asp-for="@Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].Price" type="hidden" />
+                                                        <input asp-for="@Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].IdProduct" type="hidden" />
+                                                        <input asp-for="@Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].IdProductItem" type="hidden" />
+                                                        <input asp-for="@Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].IdCategory" type="hidden" />
+                                                        <input asp-for="@Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].IdRestaurant" type="hidden" />
+                                                        <input type="number" asp-for="@Model.GetListCurrentProductsByIdRestaurant.ToArray()[i].Qty" class="form-control" />
+                                                    </div>
+                                                </td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="col">
+                        <h4>Sem categorias cadastradas</h4>
+                    </div>
+                }
+
+                <div class="row pt-3">
+                    <div class="form-group col-12">
+                        <button type="submit" name="submitButton" value="submitOrderConfirmed" class="btn btn-warning"><b>Confirmar Pedido</b></button>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>
+

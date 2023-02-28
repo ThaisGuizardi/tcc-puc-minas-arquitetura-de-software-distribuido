@@ -1,0 +1,55 @@
+﻿@using MenuFacile.Mvc.Models.Manager.Category
+
+@model IEnumerable<CategoryListViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Categorias";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+<div class="row">
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Cód. Categoria</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Restaurante</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td scope="col">@category.IdCategory</td>
+                        <td scope="col">@category.Name</td>
+                        <td scope="col">@category.RestaurantName</td>
+                        <td scope="col">@category.Active</td>
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-action="CategoryEdit" asp-controller="Category" asp-route-id="@category.IdCategory">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                        <td scope="col" class="text-center">
+                            <form method="post" asp-action="CategoryDelete" asp-controller="Category" asp-route-id="@category.IdCategory">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="col">
+            <h4>Sem categorias cadastradas.</h4>
+        </div>
+    }
+</div>

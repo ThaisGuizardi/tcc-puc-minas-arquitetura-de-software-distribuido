@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    if (UserInfoViewModel.UserRole == "Admin")
+    {
+        <ul class="navbar-nav" style="padding-left:3%">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Usuários
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item text-dark" asp-area="Identity" asp-page="/Account/Register">Criar Usuários</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Administration" asp-action="ListUsers">Listar Usuários</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Administration" asp-action="CreateRole">Criar Permissões</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Administration" asp-action="ListRoles">Listar Permissões</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Restaurante
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Segment" asp-action="SegmentAdd">Criar Segmento</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Segment" asp-action="SegmentList">Listar Segmento</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Restaurant" asp-action="RestaurantAdd">Criar Restaurante</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Restaurant" asp-action="RestaurantList">Listar Restaurante</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="PaymentMethod" asp-action="PaymentMethodAdd">Criar Forma de Pagamento</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="PaymentMethod" asp-action="PaymentMethodList">Listar Forma de Pagamento</a></li>
+                    <li class="d-none"><hr class="dropdown-divider"></li>
+                    <li class="d-none"><a class="dropdown-item text-dark" asp-area="" asp-controller="RestaurantUser" asp-action="RestaurantUserAdd">Adicionar Usuário ao Restaurante</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Cardápio
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Category" asp-action="CategoryAdd">Criar Categoria</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Category" asp-action="CategoryList">Listar Categoria</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Product" asp-action="ProductAdd">Criar Produto</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Product" asp-action="ProductList">Listar Produto</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="ProductItem" asp-action="ProductItemAdd">Criar Item Produto</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="ProductItem" asp-action="ProductItemList">Listar Item Produto</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="ProductPrice" asp-action="ProductPriceAdd">Criar Preço Produto</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="ProductPrice" asp-action="ProductPriceList">Listar Preço Produto</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Menu" asp-action="MenuAdd">Criar Cardápio</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Menu" asp-action="MenuList">Listar Cardápio</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="MenuItem" asp-action="MenuItemAdd">Criar Item do Cardápio</a></li>
+                    <li><a class="dropdown-item text-dark" asp-area="" asp-controller="MenuItem" asp-action="MenuItemList">Listar Item do Cardápio</a></li>
+                </ul>
+            </li>
+        </ul>
+    }
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="dropdown-item text-success" asp-area="" asp-controller="Dashboard" asp-action="Index"><b>Dashboard</b></a>
+        </li>
+    </ul>
+}

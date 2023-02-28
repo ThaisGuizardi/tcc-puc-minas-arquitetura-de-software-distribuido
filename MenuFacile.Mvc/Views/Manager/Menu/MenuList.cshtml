@@ -1,0 +1,59 @@
+﻿@using MenuFacile.Mvc.Models.Manager.Menu
+
+@model IEnumerable<MenuListViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Cardápios";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+<div class="row">
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Cód. Cardápio</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Restaurante</th>
+                    <th scope="col">Válido De</th>
+                    <th scope="col">Válido Até</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var menu in Model)
+                {
+                    <tr>
+                        <td scope="col">@menu.IdMenu</td>
+                        <td scope="col">@menu.Name</td>
+                        <td scope="col">@menu.RestaurantName</td>
+                        <td scope="col">@menu.ValidFrom.ToString("dd/MM/yyyy")</td>
+                        <td scope="col">@menu.ValidTo.ToString("dd/MM/yyyy")</td>
+                        <td scope="col">@menu.Active</td>
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-action="MenuEdit" asp-controller="Menu" asp-route-id="@menu.IdMenu">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                        <td scope="col" class="text-center">
+                            <form method="post" asp-action="MenuDelete" asp-controller="Menu" asp-route-id="@menu.IdMenu">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="col">
+            <h4>Sem menus cadastrados.</h4>
+        </div>
+    }
+</div>

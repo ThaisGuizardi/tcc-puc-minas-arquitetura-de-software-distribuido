@@ -1,0 +1,48 @@
+﻿@model List<UserRoleViewModel>
+
+@{
+    var roleId = ViewBag.roleId;
+    ViewData["Title"] = "Adicionar Permissão aos Usuários";
+}
+@{
+
+}
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            @if (Model.Any())
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Adicionar</th>
+                            <th scope="col">Usuário</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td scope="col">
+                                    <input type="hidden" asp-for="@Model[i].UserId" class="form-form-check-input" />
+                                    <input type="hidden" asp-for="@Model[i].UserName" class="form-form-check-input" />
+                                    <input asp-for="@Model[i].IsSelected" class="form-form-check-input" />
+                                </td>
+                                <td scope="col"><label>@Model[i].UserName</label> </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            <br />
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+            <input type="submit" value="Cancelar" class="btn btn-secondary" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

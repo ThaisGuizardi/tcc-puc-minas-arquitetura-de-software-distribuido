@@ -1,0 +1,53 @@
+﻿@using MenuFacile.Mvc.Models.Order.Dashboard
+
+@model List<GetOrderDetailViewModel>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="col-md-12">
+                <h2><b>Pedido: @Model.FirstOrDefault().IdOrder</b></h2>
+            </div>
+            <br />
+            @foreach (var pedido in Model)
+            {
+                <div class="col-md-12">
+                    <h6><b>@pedido.ProductDetail</b></h6>
+                </div>
+            }
+            <br />
+            <div class="col-md-12">
+                <h6><b>Subtotal: @string.Format("{0:C}", @Model.FirstOrDefault().TotalOrder)</b></h6>
+            </div>
+            <div class="col-md-12">
+                <h6><b>Taxa de Entrega: @string.Format("{0:C}", @Model.FirstOrDefault().DeliveryTax)</b></h6>
+            </div>
+            <div class="col-md-12">
+                <h6><b>Total: @string.Format("{0:C}", ( @Model.FirstOrDefault().TotalOrder + @Model.FirstOrDefault().DeliveryTax))</b></h6>
+            </div>
+            <br />
+            <div class="col-md-12">
+                <h6><b>Forma de Pagamento: @Model.FirstOrDefault().ProductName</b></h6>
+            </div>
+            <div class="col-md-12">
+                <h6><b>Troco para: @string.Format("{0:C}", @Model.FirstOrDefault().ChangeFor)</b></h6>
+            </div>
+            <hr />
+            <div class="col-md-12">
+                <h6><b>@Model.FirstOrDefault().CustomerName</b></h6>
+                <h6>@Model.FirstOrDefault().CustomerPhone</h6>
+            </div>
+             <div class="col-md-12">
+                <h6><b>@Model.FirstOrDefault().CustomerAddress</b></h6>
+            </div>
+            <br />
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-sm">Voltar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

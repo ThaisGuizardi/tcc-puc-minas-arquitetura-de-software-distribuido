@@ -1,0 +1,55 @@
+﻿@using MenuFacile.Mvc.Models.Manager.MenuItem
+
+@model IEnumerable<MenuItemListViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Itens do Cardápio";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+<div class="row">
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Cód. Item Cardápio</th>
+                    <th scope="col">Cardápio</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var menuItem in Model)
+                {
+                    <tr>
+                        <td scope="col">@menuItem.IdMenuItem</td>
+                        <td scope="col">@menuItem.MenuName</td>
+                        <td scope="col">@menuItem.ProductName</td>
+                        <td scope="col">@menuItem.Active</td>
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-action="MenuItemEdit" asp-controller="MenuItem" asp-route-id="@menuItem.IdMenuItem">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                        <td scope="col" class="text-center">
+                            <form method="post" asp-action="MenuItemDelete" asp-controller="MenuItem" asp-route-id="@menuItem.IdMenuItem">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="col">
+            <h4>Sem itens do menu cadastrados.</h4>
+        </div>
+    }
+</div>

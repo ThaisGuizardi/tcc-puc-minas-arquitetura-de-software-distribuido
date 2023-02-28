@@ -1,0 +1,57 @@
+﻿@using MenuFacile.Mvc.Models.Manager.PaymentMethod
+
+@model IEnumerable<PaymentMethodListViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Formas de Pagamento";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+<div class="row">
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Cód. Form Pgto.</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Restaurante</th>
+                    <th scope="col">Troco</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var paymentMethod in Model)
+                {
+                    <tr>
+                        <td scope="col">@paymentMethod.IdPaymentMethod</td>
+                        <td scope="col">@paymentMethod.Name</td>
+                        <td scope="col">@paymentMethod.RestaurantName</td>
+                        <td scope="col">@paymentMethod.Change</td>
+                        <td scope="col">@paymentMethod.Active</td>
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-action="PaymentMethodEdit" asp-controller="PaymentMethod" asp-route-id="@paymentMethod.IdPaymentMethod">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                        <td scope="col" class="text-center">
+                            <form method="post" asp-action="PaymentMethodDelete" asp-controller="PaymentMethod" asp-route-id="@paymentMethod.IdPaymentMethod">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="col">
+            <h4>Sem formas de pagamento cadastradas.</h4>
+        </div>
+    }
+</div>

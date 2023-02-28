@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Gerencimento de Usuários";
+}
+<h2>@ViewData["Title"]</h2>
+<br />
+<div class="row">
+    <div class="col">
+        <a id="loadRoleList" class="btn btn-dark">Permissões</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div id="partialRoleList" />
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

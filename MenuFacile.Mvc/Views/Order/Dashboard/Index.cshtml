@@ -1,0 +1,114 @@
+﻿@using MenuFacile.Mvc.Models.Order.Dashboard;
+
+@model DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<form method="post" class="row g-3">
+    <input type="hidden" asp-for="@Model.IdRestaurant" class="form-form-check-input" />
+    <div class="row pt-3">
+        <div class="form-group col-md-3 pt-md-2">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+        @if (UserInfoViewModel.UserRole == "Admin")
+        {
+            <div class="form-group col-md-3 pt-md-2">
+                <div class="p-md-1"></div>
+                <button type="submit" name="submitButton" value="submitPreOrder" class="btn btn-warning" asp-route-idRestaurant="@Model.IdRestaurant"><b>Gerar Pré-Pedido</b></button>
+            </div>
+        }
+        <hr />
+        <div class="form-group col-md-3 pb-md-2">
+            <label><b>Pedidos De</b></label>
+            <input type="date" asp-for="@Model.DateFrom" class="form-control" />
+            <span asp-validation-for="@Model.DateFrom" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label><b>Pedidos Até</b></label>
+            <input type="date" asp-for="@Model.DateTo" class="form-control" />
+            <span asp-validation-for="@Model.DateTo" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="p-md-3"></div>
+            <button type="submit" name="submitButton" value="submitFilter" class="btn btn-dark" asp-route-idRestaurant="@Model.IdRestaurant"><b>Filtrar</b></button>
+        </div>
+        <hr />
+        @if (UserInfoViewModel.UserRole == "Admin")
+        {
+            <div class="form-group col-md-2 col-6 pt-md-2">
+                <div><b>Pré-Pedidos</b></div>
+                <button type="submit" name="submitButton" value="filterPreOrder" class="btn btn-dark" asp-route-idRestaurant="@Model.IdRestaurant"><b>Filtrar</b></button>
+            </div>
+
+            <div class="form-group col-md-2 col-6 pt-md-2">
+                <div><b>Pedidos Confirmados</b></div>
+                <button type="submit" name="submitButton" value="filterConfirmed" class="btn btn-dark" asp-route-idRestaurant="@Model.IdRestaurant"><b>Filtrar</b></button>
+            </div>
+        }
+
+        @if (UserInfoViewModel.UserRole == "Admin" || UserInfoViewModel.UserRole == "Cozinha")
+        {
+            <div class="form-group col-md-2 col-6 pt-md-2">
+                <div><b>Em Andamento Cozinha</b></div>
+                <button type="submit" name="submitButton" value="filterCooking" class="btn btn-dark" asp-route-idRestaurant="@Model.IdRestaurant"><b>Filtrar</b></button>
+            </div>
+        }
+
+        @if (UserInfoViewModel.UserRole == "Admin")
+        {
+            <div class="form-group col-md-2 col-6 pt-md-2">
+                <div><b>Finalizado Cozinha</b></div>
+                <button type="submit" name="submitButton" value="filterCooked" class="btn btn-dark" asp-route-idRestaurant="@Model.IdRestaurant"><b>Filtrar</b></button>
+            </div>
+        }
+
+        @if (UserInfoViewModel.UserRole == "Admin" || UserInfoViewModel.UserRole == "Entrega")
+        {
+            <div class="form-group col-md-2 col-6 pt-md-2">
+                <div><b>Em Andamento Entrega</b></div>
+                <button type="submit" name="submitButton" value="filterDelivering" class="btn btn-dark" asp-route-idRestaurant="@Model.IdRestaurant"><b>Filtrar</b></button>
+            </div>
+            <div class="form-group col-md-2 col-6 pt-md-2 pb-md-2">
+                <div><b>Finalizado Entrega</b></div>
+                <button type="submit" name="submitButton" value="filterDelivered" class="btn btn-dark" asp-route-idRestaurant="@Model.IdRestaurant"><b>Filtrar</b></button>
+            </div>
+        }
+
+        <hr />
+        @foreach (var orderDetail in @Model.GetOrderList)
+        {
+            <div class="form-group col-md-3">
+                <div class="card border-dark  mb-3" style="max-width: 18rem;">
+                    <div class="card-header bg-transparent border-dark"><b>Pedido: @orderDetail.IdOrder</b></div>
+                    <div class="card-body text-dark ">
+                        <h5 class="card-title text-danger">@orderDetail.CurrentStatusView</h5>
+                        <p class="card-text">@orderDetail.OrderProductsDetails</p>
+                        @if (@orderDetail.CurrentStatus != "PreOrder")
+                        {
+                            <button type="submit" name="submitButton" value="submitOrderDetail" class="btn btn-warning btn-sm" asp-route-idOrderNextStatus="@orderDetail.IdOrder"><b>Detalhes do Pedido</b></button>
+                        }
+                    </div>
+                    <div class="card-footer bg-transparent border-dark">
+                        @if (@orderDetail.CurrentStatus != "PreOrder" && @orderDetail.CurrentStatus != "Delivered")
+                        {
+                            <span class="text-dark"><b>Alterar para:</b></span>
+                            <button type="submit" name="submitButton" value="submitNextStatus" class="btn btn-danger btn-sm" asp-route-nextStatus="@orderDetail.NextStatus" asp-route-idOrderNextStatus="@orderDetail.IdOrder"><b>@orderDetail.NextStatusView</b></button>
+                        }
+                        else if (@orderDetail.CurrentStatus == "Delivered")
+                        {
+                            <span class="text-success"><b>Pedido Entregue</b></span>
+                        }
+                        else
+                        {
+                            <span class="text-dark"><b>Aguardando Confirmação</b></span>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</form>
